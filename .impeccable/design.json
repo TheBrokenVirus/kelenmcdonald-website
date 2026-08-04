@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-03T00:00:00.000Z",
+  "title": "Design System: Kelen McDonald — Web Design Studio",
+  "extensions": {
+    "colorMeta": {
+      "clay": { "role": "primary", "displayName": "Raw Clay", "canonical": "#BE6A3E", "tonalRamp": ["#2E1B10", "#4C2C19", "#733F22", "#9C542C", "#BE6A3E", "#D08B65", "#E1AD8F", "#F1D6C2"] },
+      "clay-fill": { "role": "primary", "displayName": "Clay Fill", "canonical": "#B0592D", "tonalRamp": ["#2A1408", "#471F0E", "#6E2F16", "#8F401F", "#B0592D", "#C87C52", "#DCA47E", "#EFCBAE"] },
+      "clay-ink": { "role": "primary", "displayName": "Clay Ink", "canonical": "#9C4E26", "tonalRamp": ["#241105", "#3D1C0B", "#5F2C12", "#7C3C1B", "#9C4E26", "#B87345", "#D19C71", "#E9C6A6"] },
+      "moss": { "role": "secondary", "displayName": "Moss", "canonical": "#5C6A48", "tonalRamp": ["#161A10", "#252C1B", "#38422A", "#495636", "#5C6A48", "#7E8D68", "#A3AF8F", "#CBD2BB"] },
+      "moss-deep": { "role": "secondary", "displayName": "Moss Deep", "canonical": "#475237", "tonalRamp": ["#10130D", "#1D2216", "#2C3421", "#3A452B", "#475237", "#65735A", "#8B9683", "#B7BFAF"] },
+      "moss-faint": { "role": "secondary", "displayName": "Moss Faint (rules only)", "canonical": "#B8BCA6", "tonalRamp": ["#2E301F", "#4B4E33", "#71754D", "#959A6C", "#B8BCA6", "#CBCEBC", "#DEE0D3", "#F0F1E9"] },
+      "linen": { "role": "neutral", "displayName": "Linen", "canonical": "#EFE7D8", "tonalRamp": ["#2A2418", "#453C28", "#6B5D3D", "#8F7E56", "#B7A784", "#D3C7AC", "#EFE7D8", "#F9F5EC"] },
+      "linen-deep": { "role": "neutral", "displayName": "Linen Deep (sunk band)", "canonical": "#E4DAC7", "tonalRamp": ["#282216", "#423823", "#665538", "#89744C", "#AC9970", "#C8BB9B", "#E4DAC7", "#F5F0E6"] },
+      "linen-lift": { "role": "neutral", "displayName": "Linen Lift (surfaces)", "canonical": "#F5EFE3", "tonalRamp": ["#2C2718", "#473E28", "#6D5F3D", "#918058", "#B9AA85", "#D6CBB0", "#F5EFE3", "#FBF8F1"] },
+      "paper-hi": { "role": "neutral", "displayName": "Paper Hi (text on clay)", "canonical": "#FBF7EF", "tonalRamp": ["#2E2A1E", "#4A4530", "#726C4A", "#989063", "#C2BB94", "#DFDAC0", "#FBF7EF", "#FFFDFA"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#2A231B", "tonalRamp": ["#0E0B08", "#1B1610", "#2A231B", "#453A2C", "#665843", "#8A7C69", "#B3A996", "#D9D3C7"] },
+      "ink-soft": { "role": "neutral", "displayName": "Ink Soft", "canonical": "#5E5344", "tonalRamp": ["#1A1610", "#2B2519", "#453C28", "#5E5344", "#7C7160", "#9C917F", "#BEB6A8", "#E0DCD3"] },
+      "ink-faint": { "role": "neutral", "displayName": "Ink Faint (hairlines only)", "canonical": "#8A7C69", "tonalRamp": ["#221D16", "#382F24", "#564939", "#6F5F4C", "#8A7C69", "#A79B8B", "#C7BFB3", "#E5E1DA"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero and section H1/H2, Instrument Sans 600, balanced text-wrap." },
+      "body": { "displayName": "Body", "purpose": "Paragraph copy, Instrument Sans 400, 1.62 line-height." },
+      "accent-serif": { "displayName": "Accent Serif", "purpose": "Budgeted for exactly one pull-quote — Newsreader italic 300, never a heading." },
+      "label": { "displayName": "Label / Mono", "purpose": "Section labels, tags, dates, badge text — IBM Plex Mono, genuinely data-like content only." }
+    },
+    "shadows": [
+      { "name": "button-rest", "value": "0 3px 8px rgba(60,38,20,.16), 0 12px 26px -10px rgba(60,38,20,.34)", "purpose": "Primary CTA at rest." },
+      { "name": "button-hover", "value": "0 5px 12px rgba(60,38,20,.18), 0 18px 34px -12px rgba(60,38,20,.4)", "purpose": "Primary CTA on hover, paired with a 1px upward transform." },
+      { "name": "card-rest", "value": "0 4px 14px rgba(60,38,20,.08), 0 26px 50px -28px rgba(60,38,20,.35)", "purpose": "Work plates and lifted surfaces at rest." },
+      { "name": "card-hover", "value": "0 4px 12px rgba(60,38,20,.1), 0 24px 48px -26px rgba(60,38,20,.38)", "purpose": "Work plates and lifted surfaces on hover." },
+      { "name": "header-stuck", "value": "0 6px 20px -14px rgba(60,38,20,.5)", "purpose": "Sticky header once scrolled (paired with a moss-faint 1px border)." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(.16,.72,.24,1)", "purpose": "Default easing for all transitions — gentle, unhurried settle, no bounce." },
+      { "name": "duration-standard", "value": "560ms", "purpose": "Default transition duration site-wide." }
+    ],
+    "breakpoints": [
+      { "name": "xl", "value": "1000px" },
+      { "name": "lg", "value": "820px" },
+      { "name": "md", "value": "720px" },
+      { "name": "sm", "value": "560px" },
+      { "name": "xs", "value": "480px" },
+      { "name": "xxs", "value": "360px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Filled clay CTA with a trailing arrow that nudges right on hover.",
+      "html": "<a class=\"btn\" href=\"mailto:contact@kelenmcdonald.com\">Start a project <svg class=\"arw\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 8h10M9 4l4 4-4 4\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:.6rem;font-size:1rem;font-weight:600;letter-spacing:-.01em;padding:.86rem 1.35rem;border-radius:4px;background-color:#B0592D;color:#FBF7EF;border:1px solid #9C4E26;box-shadow:0 3px 8px rgba(60,38,20,.16),0 12px 26px -10px rgba(60,38,20,.34);transition:transform 560ms cubic-bezier(.16,.72,.24,1),box-shadow 560ms cubic-bezier(.16,.72,.24,1),background-color 560ms cubic-bezier(.16,.72,.24,1)}.ds-btn:hover{background-color:#9C4E26;transform:translateY(-1px);box-shadow:0 5px 12px rgba(60,38,20,.18),0 18px 34px -12px rgba(60,38,20,.4)}.ds-btn:focus-visible{outline:2px solid #2A231B;outline-offset:4px;border-radius:4px}.ds-btn .ds-arw{transition:transform 560ms cubic-bezier(.16,.72,.24,1)}.ds-btn:hover .ds-arw{transform:translateX(3px)}"
+    },
+    {
+      "name": "Concept Badge",
+      "kind": "chip",
+      "refersTo": "badge-concept",
+      "description": "Marks every Work entry as a self-directed concept project. Filled, never small meta text — an honesty commitment from PRODUCT.md.",
+      "html": "<span class=\"badge\">Concept project</span>",
+      "css": ".ds-badge{display:inline-flex;align-items:center;gap:.42rem;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.6875rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;background-color:#9C4E26;color:#FBF7EF;padding:.36rem .62rem;border-radius:2px}"
+    },
+    {
+      "name": "Text Link",
+      "kind": "custom",
+      "refersTo": "tlink",
+      "description": "Secondary/inline link in moss, used for 'see the work' style navigation and inline mailto fallbacks.",
+      "html": "<a class=\"tlink\" href=\"#work\">See the work ↓</a>",
+      "css": ".ds-tlink{display:inline-flex;align-items:center;gap:.45rem;color:#5C6A48;font-weight:500;border-bottom:1px solid #B8BCA6;padding-bottom:2px;transition:color 560ms cubic-bezier(.16,.72,.24,1),border-color 560ms cubic-bezier(.16,.72,.24,1)}.ds-tlink:hover{color:#475237;border-bottom-color:#5C6A48}"
+    },
+    {
+      "name": "Work Plate",
+      "kind": "card",
+      "refersTo": null,
+      "description": "Lifted linen surface holding one authored inline-SVG illustration per case study (never a stock photo or generic icon).",
+      "html": "<div class=\"ds-plate\"><svg width=\"100%\" viewBox=\"0 0 200 140\"><!-- authored per-project line art --></svg></div>",
+      "css": ".ds-plate{background-color:#F5EFE3;border-radius:6px;padding:24px;box-shadow:0 4px 14px rgba(60,38,20,.08),0 26px 50px -28px rgba(60,38,20,.35);transition:box-shadow 560ms cubic-bezier(.16,.72,.24,1)}.ds-plate:hover{box-shadow:0 4px 12px rgba(60,38,20,.1),0 24px 48px -26px rgba(60,38,20,.38)}"
+    },
+    {
+      "name": "Section Head",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "The signature structural device: a mono label sits beside the heading in a fixed 140px column, never stacked above it as a kicker.",
+      "html": "<div class=\"ds-sec-head\"><p class=\"ds-label\">Selected work</p><h2>Three projects, built to show range</h2></div>",
+      "css": ".ds-sec-head{display:grid;grid-template-columns:140px minmax(0,1fr);gap:0 32px;align-items:start}.ds-label{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:#5E5344}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Ceramics Atelier",
+    "overview": "A small, well-run studio where the warmth comes from material and care, not from a brochure trying to seem friendly. The page reads like raw linen, terracotta, and moss under natural light — grain-textured paper, hand-drawn marks, one sparing italic voice for a single moment of feeling. It exists to counter the default AI-generated \"warm\" look (cream ground, oversized italic serif, single terracotta accent): this system pairs clay with moss as a genuine dual-accent system and puts a geometric humanist sans in the display role instead of a serif, so the warmth comes from color, texture, and spacing rather than typographic drama.",
+    "keyCharacteristics": [
+      "Muted linen ground, never stark cream — a fabric/paper world, not a screen-white one",
+      "Dual accent (clay + moss) doing real work, not one color propped up alone",
+      "Instrument Sans carries the display voice; Newsreader italic appears exactly once, as a pull-quote",
+      "Section labels sit beside headings in a narrow margin column, never stacked above them",
+      "Soft, warm-tinted offset shadows (never a flat zero-offset glow) supply all depth",
+      "A fixed SVG paper-grain texture over the whole page — texture, not gradient"
+    ],
+    "rules": [
+      { "name": "The Dual-Accent Rule", "body": "Clay and moss always appear together across a surface, never clay alone. A page that reaches only for clay has regressed to the single-terracotta-accent cliché this system exists to avoid.", "section": "colors" },
+      { "name": "The Small-Text Split Rule", "body": "Raw clay (#BE6A3E) never carries text below large/display scale — use clay-ink for small clay-colored text and reserve raw clay for marks, borders, and large surfaces.", "section": "colors" },
+      { "name": "The One-Serif Rule", "body": "Newsreader italic is budgeted for a single use on the page. Adding a second serif moment dilutes the sans-as-display decision this system is built on.", "section": "typography" },
+      { "name": "The Beside-Not-Above Rule", "body": "A section label never sits stacked directly above its heading. It lives in a narrow (140px) margin column beside the heading, or is omitted entirely.", "section": "typography" },
+      { "name": "The Warm-Shadow Rule", "body": "Every shadow is tinted from ink-brown, never neutral black or gray — depth stays inside the linen/clay/moss world instead of reading as generic UI chrome.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use clay and moss together as a genuine dual-accent system — never ship a screen with clay as the only accent color.",
+      "Do put section labels beside headings in the 140px margin column (or omit them), never stacked above.",
+      "Do author every illustrative mark as inline SVG in the world's own line-art grammar, sized and drawn per context.",
+      "Do keep shadows warm-tinted, layered (tight + diffuse), and offset — never a flat zero-offset glow.",
+      "Do keep corners at 2/4/6px across the whole system; nothing pill-shaped.",
+      "Do keep the \"Concept\"/speculative labeling on every work entry prominent (a filled badge, not small meta text) — this is a durable honesty commitment from PRODUCT.md, not a style choice.",
+      "Do pair every mailto CTA with a visible plain-text fallback address nearby."
+    ],
+    "donts": [
+      "Don't use a high-contrast serif as the primary display voice. Newsreader italic is budgeted for exactly one pull-quote; a second appearance dilutes the sans-as-display decision.",
+      "Don't default to cream + serif + terracotta. That combination is the specific AI-generated cliché this system was built to avoid.",
+      "Don't use purple/violet, gradients (including gradient text), glass/blur decoration, or \"SaaS blob\" shapes anywhere.",
+      "Don't use stock photography. Illustration, texture, and typography carry the page.",
+      "Don't build Services or Work as same-size icon+heading+text card grids — both use the alternating/list structures documented in Layout.",
+      "Don't let any interactive element look clickable (hover elevation, cursor affordance) without a real link or keyboard focus target — none of the work entries link anywhere today, so their hover states stay modest."
+    ]
+  }
+}

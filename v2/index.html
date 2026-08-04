@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelen McDonald — Web Design Studio</title>
+<meta name="description" content="Independent web design studio. Brand identity, web design, and hand-built front-end development for small businesses and independent creators.">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#0B0C0E;
+    --ground-2:#0F1113;
+    --ground-3:#121417;
+    --ink:#EDEEF2;
+    --ink-2:#9CA3AC;
+    --signal:#3FE0C5;
+    --signal-dim:#2AA893;
+    --rule:rgba(237,238,242,0.12);
+    --rule-strong:rgba(237,238,242,0.22);
+    --rule-signal:rgba(63,224,197,0.34);
+    --glow:rgba(63,224,197,0.22);
+
+    --f-display:'Space Grotesk','Segoe UI',sans-serif;
+    --f-body:'Sora','Segoe UI',sans-serif;
+    --f-mono:'Space Mono','Courier New',monospace;
+
+    --hdr:60px;
+    --pad:clamp(20px,4.4vw,56px);
+    --max:1240px;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--ground);
+    color:var(--ink);
+    font-family:var(--f-body);
+    font-weight:300;
+    font-size:1.0625rem;
+    line-height:1.65;
+    padding-top:calc(var(--hdr) + 1px);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;max-width:100%}
+
+  h1,h2,h3{font-family:var(--f-display);font-weight:600;margin:0;text-wrap:balance}
+  p{margin:0}
+  a{color:inherit}
+
+  ::selection{background:var(--signal);color:#06110E}
+
+  :focus-visible{
+    outline:2px solid var(--signal);
+    outline-offset:4px;
+    border-radius:1px;
+  }
+
+  .wrap{max-width:var(--max);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+  /* full-page vertical rules — the console frame */
+  @media (min-width:1100px){
+    .frame{
+      position:fixed;inset:0;pointer-events:none;z-index:1;
+      display:flex;justify-content:center;
+    }
+    .frame span{
+      width:min(var(--max),100%);height:100%;
+      border-left:1px solid var(--rule);
+      border-right:1px solid var(--rule);
+    }
+  }
+  .frame{display:none}
+  @media (min-width:1100px){.frame{display:flex}}
+
+  .mono{
+    font-family:var(--f-mono);
+    font-size:0.6875rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:400;
+  }
+
+  /* ─────────────────────────── HEADER ─────────────────────────── */
+  .hdr{
+    position:fixed;top:0;left:0;right:0;z-index:40;
+    background:rgba(11,12,14,0.86);
+    backdrop-filter:saturate(160%) blur(10px);
+    -webkit-backdrop-filter:saturate(160%) blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  .hdr-in{
+    height:var(--hdr);
+    display:flex;align-items:center;gap:24px;
+  }
+  .brand{
+    display:flex;align-items:center;gap:10px;
+    text-decoration:none;flex:0 0 auto;
+  }
+  .brand svg{color:var(--signal);flex:0 0 auto}
+  .brand b{
+    font-family:var(--f-display);
+    font-weight:600;font-size:0.9375rem;letter-spacing:-0.015em;
+    white-space:nowrap;
+  }
+  .brand:hover b{color:var(--signal)}
+
+  .nav{display:flex;align-items:center;gap:28px;margin-left:auto}
+  .nav a{
+    font-family:var(--f-body);font-weight:400;font-size:0.875rem;
+    letter-spacing:0.01em;text-decoration:none;color:var(--ink-2);
+    padding:6px 0;position:relative;transition:color .18s var(--ease);
+  }
+  .nav a::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+    background:var(--signal);transform:scaleX(0);transform-origin:left;
+    transition:transform .28s var(--ease);
+  }
+  .nav a:hover,.nav a:focus-visible{color:var(--ink)}
+  .nav a:hover::after,.nav a:focus-visible::after{transform:scaleX(1)}
+
+  .clock{
+    display:flex;align-items:center;gap:9px;
+    padding-left:24px;border-left:1px solid var(--rule);
+    color:var(--ink-2);white-space:nowrap;
+  }
+  .clock .dot{
+    width:5px;height:5px;background:var(--signal);flex:0 0 auto;
+  }
+  .clock .t{color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:0.1em}
+  .clock .z{color:var(--signal)}
+
+  .hdr-cta{
+    margin-left:4px;
+    font-family:var(--f-mono);font-size:0.6875rem;letter-spacing:0.12em;
+    text-transform:uppercase;text-decoration:none;
+    color:var(--signal);
+    border:1px solid var(--rule-signal);
+    padding:9px 14px;border-radius:2px;
+    transition:background .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease);
+  }
+  .hdr-cta:hover,.hdr-cta:focus-visible{
+    border-color:var(--signal);
+    background:rgba(63,224,197,0.08);
+    box-shadow:0 0 18px -2px var(--glow);
+  }
+
+  /* mobile header: two hairline rows, no wrapping collisions */
+  .navstrip{display:none}
+  @media (max-width:760px){
+    :root{--hdr:100px}
+    .hdr-in{height:56px;gap:12px}
+    .nav,.hdr-cta{display:none}
+    .clock{margin-left:auto;padding-left:14px}
+    .navstrip{
+      display:grid;grid-template-columns:repeat(4,1fr);
+      border-top:1px solid var(--rule);
+      height:44px;
+    }
+    .navstrip a{
+      display:flex;align-items:center;justify-content:center;
+      text-decoration:none;color:var(--ink-2);
+      font-family:var(--f-mono);font-size:0.625rem;letter-spacing:0.1em;
+      text-transform:uppercase;
+      border-left:1px solid var(--rule);
+    }
+    .navstrip a:first-child{border-left:0}
+    .navstrip a.on{color:var(--signal)}
+  }
+  @media (max-width:420px){
+    .brand b{font-size:0.8125rem}
+    .clock{font-size:0.625rem;gap:7px;padding-left:12px}
+    .clock .lbl{display:none}
+    .navstrip a{font-size:0.5625rem;letter-spacing:0.06em}
+  }
+
+  /* ─────────────────────────── HERO ─────────────────────────── */
+  .hero{position:relative;z-index:2;padding-top:clamp(56px,10vh,110px)}
+  .hero-grid{
+    display:grid;grid-template-columns:minmax(0,1fr) 190px;
+    gap:48px;align-items:start;
+    padding-bottom:clamp(48px,7vw,88px);
+  }
+  h1{
+    font-size:clamp(2.55rem,6.7vw,5.25rem);
+    line-height:0.98;
+    letter-spacing:-0.038em;
+    font-weight:600;
+    max-width:16ch;
+  }
+  h1 .soft{color:var(--ink-2)}
+  .accent-rule{
+    height:3px;background:var(--signal);
+    width:min(420px,68%);
+    margin:clamp(26px,3.4vw,40px) 0 clamp(22px,2.6vw,30px);
+    box-shadow:0 0 22px -2px var(--glow);
+  }
+  .lede{
+    color:var(--ink-2);font-size:clamp(1rem,1.35vw,1.1875rem);
+    line-height:1.62;max-width:56ch;
+  }
+  .lede strong{color:var(--ink);font-weight:500}
+
+  .cta-row{margin-top:clamp(30px,3.6vw,44px)}
+  .btn{
+    display:inline-flex;align-items:center;gap:12px;
+    font-family:var(--f-display);font-weight:500;font-size:1rem;
+    letter-spacing:-0.005em;
+    color:var(--ink);text-decoration:none;
+    background:transparent;
+    border:1px solid var(--rule-signal);
+    border-radius:2px;
+    padding:16px 24px;
+    transition:border-color .22s var(--ease),box-shadow .22s var(--ease),background .22s var(--ease),color .22s var(--ease);
+  }
+  .btn svg{color:var(--signal);transition:transform .28s var(--ease)}
+  .btn:hover,.btn:focus-visible{
+    color:var(--signal);
+    border-color:var(--signal);
+    background:rgba(63,224,197,0.06);
+    box-shadow:0 0 28px -4px var(--glow);
+  }
+  .btn:hover svg{transform:translateX(4px)}
+  .fallback{
+    margin-top:14px;color:var(--ink-2);font-size:0.875rem;line-height:1.6;
+  }
+  .fallback a{
+    color:var(--signal);text-decoration:none;
+    border-bottom:1px solid var(--rule-signal);
+    padding-bottom:1px;
+  }
+  .fallback a:hover,.fallback a:focus-visible{border-bottom-color:var(--signal)}
+
+  .hero-mark{color:var(--signal);opacity:0.9;justify-self:end}
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:minmax(0,1fr);gap:0}
+    .hero-mark{display:none}
+  }
+
+  /* status strip — real fields, hairline separated */
+  .status{
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    display:grid;grid-template-columns:repeat(3,1fr);
+  }
+  .status div{
+    padding:18px 0 18px 22px;
+    border-left:1px solid var(--rule);
+  }
+  .status div:first-child{border-left:0;padding-left:0}
+  .status dt{color:var(--signal);margin-bottom:7px}
+  .status dd{
+    margin:0;font-size:0.875rem;color:var(--ink);font-weight:300;line-height:1.45;
+  }
+  @media (max-width:760px){
+    .status{grid-template-columns:1fr}
+    .status div{padding:14px 0;border-left:0;border-top:1px solid var(--rule)}
+    .status div:first-child{border-top:0}
+  }
+
+  /* ─────────────────────────── SECTIONS ─────────────────────────── */
+  section{position:relative;z-index:2}
+  .sec{padding:clamp(72px,10vw,132px) 0 clamp(56px,7vw,96px)}
+  .sec-head{
+    display:grid;grid-template-columns:210px minmax(0,1fr);
+    gap:40px;align-items:start;
+    margin-bottom:clamp(40px,5vw,64px);
+  }
+  .rail{color:var(--signal);padding-top:10px}
+  .rail span{display:block;color:var(--ink-2);margin-top:8px;letter-spacing:0.1em}
+  h2{
+    font-size:clamp(1.85rem,3.5vw,2.85rem);
+    line-height:1.06;letter-spacing:-0.032em;max-width:20ch;
+  }
+  .sec-lede{
+    margin-top:18px;color:var(--ink-2);max-width:62ch;
+    font-size:1rem;line-height:1.62;
+  }
+  @media (max-width:820px){
+    .sec-head{display:flex;flex-direction:column;gap:0}
+    .rail{
+      order:2;padding-top:20px;margin-top:28px;
+      border-top:1px solid var(--rule);
+    }
+    .rail span{display:inline;margin-top:0;margin-left:10px}
+  }
+
+  /* ── WORK INDEX ── */
+  .idx-head{
+    display:grid;
+    grid-template-columns:40px minmax(0,1fr) 92px 200px 132px;
+    gap:20px;
+    padding-bottom:12px;
+    border-bottom:1px solid var(--rule-strong);
+    color:var(--ink-2);
+  }
+  .idx-head span:first-child{grid-column:1/3}
+  .idx{list-style:none;margin:0;padding:0}
+  .row{
+    display:grid;
+    grid-template-columns:40px minmax(0,1fr) 92px 200px 132px;
+    gap:20px;align-items:start;
+    padding:26px 0;
+    border-bottom:1px solid var(--rule);
+    transition:background .2s var(--ease);
+  }
+  .row:hover{background:var(--ground-2)}
+  .glyph{color:var(--signal-dim);padding-top:3px;transition:color .2s var(--ease)}
+  .row:hover .glyph{color:var(--signal)}
+  .row h3{
+    font-size:1.375rem;letter-spacing:-0.022em;font-weight:600;line-height:1.2;
+  }
+  .row p{
+    margin-top:9px;color:var(--ink-2);font-size:0.9375rem;
+    line-height:1.6;max-width:52ch;
+  }
+  .cell{color:var(--ink-2);padding-top:5px}
+  .badge{
+    display:inline-block;
+    font-family:var(--f-mono);font-size:0.6875rem;font-weight:700;
+    letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--signal);
+    border:1px solid var(--signal);
+    background:rgba(63,224,197,0.07);
+    padding:6px 11px;border-radius:2px;white-space:nowrap;
+  }
+  .badge small{
+    display:block;font-weight:400;font-size:0.5625rem;letter-spacing:0.1em;
+    color:var(--ink-2);margin-top:2px;
+  }
+  .idx-note{
+    margin-top:22px;color:var(--ink-2);font-size:0.875rem;line-height:1.6;max-width:66ch;
+  }
+  @media (max-width:900px){
+    .idx-head{display:none}
+    .row{
+      grid-template-columns:32px auto minmax(0,1fr);
+      grid-template-areas:
+        "glyph body  body"
+        ".     year  disc"
+        ".     badge badge";
+      gap:14px 16px;padding:24px 0;
+    }
+    .glyph{grid-area:glyph}
+    .row .body{grid-area:body}
+    .cell-year{grid-area:year}
+    .cell-disc{grid-area:disc}
+    .status-cell{grid-area:badge;margin-top:4px}
+    .row .cell{padding-top:0}
+  }
+
+  /* ── SERVICES ── */
+  .svc{margin:0;border-top:1px solid var(--rule-strong)}
+  .svc-row{
+    display:grid;grid-template-columns:300px minmax(0,1fr);
+    gap:40px;
+    padding:clamp(30px,4vw,44px) 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .svc dt{
+    font-family:var(--f-display);font-weight:600;
+    font-size:clamp(1.35rem,2.3vw,1.75rem);
+    letter-spacing:-0.026em;line-height:1.15;
+    position:relative;padding-left:22px;
+  }
+  .svc dt::before{
+    content:"";position:absolute;left:0;top:0.55em;
+    width:12px;height:1px;background:var(--signal);
+  }
+  .svc dd{margin:0}
+  .svc dd p{color:var(--ink-2);max-width:62ch;font-size:1rem;line-height:1.66}
+  .tags{
+    display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:18px;
+    border-top:1px solid var(--rule);padding-top:14px;
+  }
+  .tags span{
+    color:var(--ink-2);line-height:1.4;
+    display:inline-flex;align-items:center;gap:9px;
+  }
+  .tags span::before{
+    content:"";width:4px;height:4px;flex:0 0 auto;
+    background:var(--signal-dim);
+  }
+  @media (max-width:820px){
+    .svc-row{grid-template-columns:minmax(0,1fr);gap:16px}
+  }
+
+  /* ── ABOUT ── */
+  .about{
+    display:grid;grid-template-columns:300px minmax(0,1fr);
+    gap:clamp(32px,5vw,64px);align-items:start;
+  }
+  .plate{
+    border:1px solid var(--rule);position:relative;
+    aspect-ratio:1/1;max-width:260px;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--ground-2);
+  }
+  .plate .mono-mark{
+    font-family:var(--f-display);font-weight:600;
+    font-size:4rem;letter-spacing:-0.05em;color:var(--ink);
+  }
+  .plate i{position:absolute;width:10px;height:10px;border:0;border-color:var(--signal);border-style:solid}
+  .plate i:nth-child(1){top:-1px;left:-1px;border-top-width:1px;border-left-width:1px}
+  .plate i:nth-child(2){top:-1px;right:-1px;border-top-width:1px;border-right-width:1px}
+  .plate i:nth-child(3){bottom:-1px;left:-1px;border-bottom-width:1px;border-left-width:1px}
+  .plate i:nth-child(4){bottom:-1px;right:-1px;border-bottom-width:1px;border-right-width:1px}
+  .plate-meta{margin-top:14px;color:var(--ink-2);max-width:260px}
+  .about-body p{color:var(--ink-2);font-size:1.0625rem;line-height:1.72;max-width:68ch}
+  .about-body p + p{margin-top:20px}
+  .about-body strong{color:var(--ink);font-weight:500}
+  @media (max-width:820px){
+    .about{grid-template-columns:minmax(0,1fr)}
+    .plate{max-width:180px}
+  }
+
+  /* ── CONTACT ── */
+  .contact{
+    border-top:1px solid var(--rule-strong);
+    padding:clamp(72px,9vw,116px) 0 clamp(64px,8vw,100px);
+  }
+  .contact h2{font-size:clamp(2.1rem,4.6vw,3.6rem);letter-spacing:-0.036em;max-width:15ch}
+  .contact .accent-rule{width:min(300px,52%)}
+  .contact-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:44px;align-items:end}
+  @media (max-width:820px){
+    .contact-grid{grid-template-columns:minmax(0,1fr);align-items:start;gap:32px}
+  }
+
+  /* ── FOOTER ── */
+  footer{
+    border-top:1px solid var(--rule);
+    padding:26px 0 40px;position:relative;z-index:2;
+  }
+  .foot{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;color:var(--ink-2)}
+  .foot a{color:var(--signal);text-decoration:none;border-bottom:1px solid transparent}
+  .foot a:hover,.foot a:focus-visible{border-bottom-color:var(--signal)}
+  .foot .sp{margin-left:auto}
+
+  .skip{
+    position:absolute;left:-9999px;top:0;
+    background:var(--ground-3);color:var(--signal);
+    padding:12px 18px;border:1px solid var(--signal);z-index:60;
+    font-family:var(--f-mono);font-size:0.75rem;text-decoration:none;
+  }
+  .skip:focus{left:12px;top:12px}
+
+  /* ── MOTION: visible by default, only hidden once JS confirms it can restore ── */
+  html.js .rv{
+    opacity:0;
+    transform:translateY(16px);
+    filter:blur(5px);
+  }
+  html.js .rv.in{
+    opacity:1;transform:none;filter:blur(0);
+    transition:opacity .7s var(--ease),transform .7s var(--ease),filter .7s var(--ease);
+  }
+  html.js .rv.d1.in{transition-delay:.07s}
+  html.js .rv.d2.in{transition-delay:.14s}
+  html.js .rv.d3.in{transition-delay:.21s}
+  html.js .hero .accent-rule{transform:scaleX(0);transform-origin:left}
+  html.js .hero .accent-rule.in{
+    transform:scaleX(1);
+    transition:transform .9s var(--ease) .18s;
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+      transition-duration:.01ms !important;
+      animation-duration:.01ms !important;
+      animation-iteration-count:1 !important;
+    }
+    html.js .rv{opacity:1;transform:none;filter:none}
+    html.js .hero .accent-rule{transform:none}
+  }
+</style>
+</head>
+<body>
+<!--
+  THESIS: Prove precision and control through an instrument-panel register — dark, sharp, legible
+  under pressure — refusing the glossy rounded-card SaaS-portfolio template.
+  OWN-WORLD: Near-black #0B0C0E ground, off-white #EDEEF2 ink, tinted #9CA3AC secondary, one
+  electric #3FE0C5 signal committed across borders, underlines, active states and glows. Space
+  Grotesk display, Sora body, Space Mono for real data labels only. Corners 0–4px, never pills.
+  Structure is hairline borders and precise alignment, not drop-shadow cards.
+  STORY: A prospect senses "this person builds serious, precise, software-grade sites" — a fixed
+  console header, a terse pitch, a dense work index, a direct contact CTA.
+  FIRST VIEWPORT: Thin sharp status bar (mark, nav, live local-time readout) over a near-black
+  hero: tight-tracked headline, one accent rule, terse subhead, hairline CTA with glow-on-hover.
+  FORM: v2 of 3 parallel user-pinned explorations. Takes the reference's dark confidence and its
+  live-clock functional detail; refuses its pill nav, glossy cards and avatar bubbles outright.
+-->
+<a class="skip" href="#main">Skip to content</a>
+<div class="frame" aria-hidden="true"><span></span></div>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="#top">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <rect x="0.5" y="0.5" width="19" height="19" stroke="currentColor" stroke-opacity="0.45"/>
+        <rect x="5.5" y="5.5" width="9" height="9" stroke="currentColor"/>
+        <path d="M10 0v3M10 17v3M0 10h3M17 10h3" stroke="currentColor" stroke-opacity="0.7"/>
+      </svg>
+      <b>Kelen McDonald</b>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <p class="clock mono" aria-label="Local time">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="lbl">Local</span>
+      <span class="t" id="clock">--:--:--</span>
+      <span class="z" id="tz"></span>
+    </p>
+
+    <a class="hdr-cta" href="#contact">Start a project</a>
+  </div>
+  <nav class="navstrip" aria-label="Primary mobile">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a class="on" href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <h1 class="rv">Websites built by hand.<br><span class="soft">Not assembled from a template.</span></h1>
+        <div class="accent-rule rv" aria-hidden="true"></div>
+        <p class="lede rv d1">Brand identity, web design, and front-end development for small businesses and independent creators. <strong>One person, start to finish.</strong> Every decision made on purpose, every line written by hand.</p>
+        <div class="cta-row rv d2">
+          <a class="btn" href="mailto:hello@kelenmcdonald.com?subject=Project%20inquiry">
+            Start a project
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true">
+              <path d="M0 6h16M11.5 1L16.5 6l-5 5" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </a>
+          <p class="fallback">Button not opening your mail app? Email <a href="mailto:hello@kelenmcdonald.com">hello@kelenmcdonald.com</a> directly.</p>
+        </div>
+      </div>
+
+      <svg class="hero-mark rv d3" width="176" height="176" viewBox="0 0 176 176" fill="none" aria-hidden="true">
+        <rect x="0.5" y="0.5" width="175" height="175" stroke="currentColor" stroke-opacity="0.22"/>
+        <rect x="32.5" y="32.5" width="111" height="111" stroke="currentColor" stroke-opacity="0.4"/>
+        <rect x="64.5" y="64.5" width="47" height="47" stroke="currentColor"/>
+        <path d="M88 0v56M88 120v56M0 88h56M120 88h56" stroke="currentColor" stroke-opacity="0.35"/>
+        <path d="M88 80v16M80 88h16" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M0 16h8M0 40h8M0 64h8M0 112h8M0 136h8M0 160h8" stroke="currentColor" stroke-opacity="0.55"/>
+        <path d="M168 16h8M168 40h8M168 64h8M168 112h8M168 136h8M168 160h8" stroke="currentColor" stroke-opacity="0.55"/>
+      </svg>
+    </div>
+
+    <dl class="status rv">
+      <div>
+        <dt class="mono">Availability</dt>
+        <dd>Taking on a small number of new projects</dd>
+      </div>
+      <div>
+        <dt class="mono">Disciplines</dt>
+        <dd>Brand identity · Web design · Development</dd>
+      </div>
+      <div>
+        <dt class="mono">Working</dt>
+        <dd>Remotely, with clients anywhere</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ─── WORK ─── -->
+<section class="sec" id="work" style="scroll-margin-top:calc(var(--hdr) + 24px)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="rail mono rv">Work / Index<span>Three entries</span></p>
+      <div class="rv d1">
+        <h2>Three concept builds, each solving a different problem.</h2>
+        <p class="sec-lede">These are speculative pieces: self-directed briefs written to work through a real problem end to end. No client commissioned them, and none of them shipped for a business. They are here as evidence of how I think, not as a results reel.</p>
+      </div>
+    </div>
+
+    <div class="idx-head mono" aria-hidden="true">
+      <span>Project</span>
+      <span>Year</span>
+      <span>Discipline</span>
+      <span>Status</span>
+    </div>
+
+    <ul class="idx">
+      <li class="row rv">
+        <span class="glyph" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="0.5" y="0.5" width="27" height="27" stroke="currentColor" stroke-opacity="0.4"/>
+            <circle cx="14" cy="14" r="7.5" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M6 14h16" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </span>
+        <div class="body">
+          <h3>Marrow Coffee Roasters</h3>
+          <p>A single-origin roastery site built around a warm, tactile identity and an online ordering flow.</p>
+        </div>
+        <span class="cell cell-year mono">2026</span>
+        <span class="cell cell-disc mono">Brand + Web</span>
+        <span class="status-cell"><span class="badge">Concept<small>Speculative</small></span></span>
+      </li>
+
+      <li class="row rv d1">
+        <span class="glyph" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="0.5" y="0.5" width="27" height="27" stroke="currentColor" stroke-opacity="0.4"/>
+            <path d="M6 22V9M14 22V5M22 22V13" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M4 22h20" stroke="currentColor" stroke-opacity="0.7"/>
+          </svg>
+        </span>
+        <div class="body">
+          <h3>Faraday Studio</h3>
+          <p>A portfolio site for a two-person architecture practice, built to let the project photography lead.</p>
+        </div>
+        <span class="cell cell-year mono">2026</span>
+        <span class="cell cell-disc mono">Web Design</span>
+        <span class="status-cell"><span class="badge">Concept<small>Speculative</small></span></span>
+      </li>
+
+      <li class="row rv d2">
+        <span class="glyph" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="0.5" y="0.5" width="27" height="27" stroke="currentColor" stroke-opacity="0.4"/>
+            <path d="M9 4v20M19 4v20M4 9h20M4 19h20" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </span>
+        <div class="body">
+          <h3>Loom &amp; Line</h3>
+          <p>A small-batch textile shop with a product grid designed to feel like flipping through a catalog.</p>
+        </div>
+        <span class="cell cell-year mono">2026</span>
+        <span class="cell cell-disc mono">E-commerce</span>
+        <span class="status-cell"><span class="badge">Concept<small>Speculative</small></span></span>
+      </li>
+    </ul>
+
+    <p class="idx-note rv">Every entry above is a concept piece. If you want to talk through what a build like one of these would look like for your business, email me and I will walk you through the thinking.</p>
+  </div>
+</section>
+
+<!-- ─── SERVICES ─── -->
+<section class="sec" id="services" style="scroll-margin-top:calc(var(--hdr) + 24px)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="rail mono rv">Services / Scope<span>Three</span></p>
+      <div class="rv d1">
+        <h2>Three things, done properly, by the same pair of hands.</h2>
+        <p class="sec-lede">Take one or take all three. Nothing here gets handed off to a subcontractor or dropped into a page builder.</p>
+      </div>
+    </div>
+
+    <dl class="svc">
+      <div class="svc-row rv">
+        <dt>Brand identity</dt>
+        <dd>
+          <p>Logo, color, and type, resolved into a visual language that holds up across every page, not a mark that only works on the homepage.</p>
+          <p class="tags mono"><span>Logo</span><span>Color</span><span>Type</span><span>Visual language</span></p>
+        </dd>
+      </div>
+      <div class="svc-row rv d1">
+        <dt>Web design</dt>
+        <dd>
+          <p>Wireframes through high-fidelity design. Structure gets decided before surface, so the layout is carrying the message rather than decorating it.</p>
+          <p class="tags mono"><span>Wireframes</span><span>Layout</span><span>High fidelity</span></p>
+        </dd>
+      </div>
+      <div class="svc-row rv d2">
+        <dt>Development</dt>
+        <dd>
+          <p>Fast, responsive, hand-built sites. No page-builder plugins, no templates. The code that ships is code I wrote for your site specifically.</p>
+          <p class="tags mono"><span>Hand-built</span><span>Responsive</span><span>No plugins</span></p>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section class="sec" id="about" style="scroll-margin-top:calc(var(--hdr) + 24px)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="rail mono rv">About / Practice<span>Solo</span></p>
+      <div class="rv d1">
+        <h2>Hi, I'm Kelen McDonald.</h2>
+      </div>
+    </div>
+
+    <div class="about">
+      <div class="rv">
+        <div class="plate" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+          <span class="mono-mark">KM</span>
+        </div>
+        <p class="plate-meta mono">Solo practice · Remote · One pair of hands</p>
+      </div>
+      <div class="about-body rv d1">
+        <p>I design and build websites for small businesses and independent creators. Every project starts the same way: <strong>understanding what the site actually needs to do</strong>, for the people who'll actually use it.</p>
+        <p>Then I sketch, design, and build it by hand — no drag-and-drop templates standing between your business and how it looks online.</p>
+        <p>Currently taking on a small number of new projects, working remotely with clients anywhere. "Studio" is how I frame the work, not a claim about headcount. It is me, on your project, from first sketch to launch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="contact" id="contact" style="scroll-margin-top:calc(var(--hdr) + 24px)">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="rv">
+        <h2>Tell me what you're building.</h2>
+        <div class="accent-rule" aria-hidden="true"></div>
+        <p class="lede">Send a short note about your business and what the site needs to do. That is enough to start.</p>
+      </div>
+      <div class="rv d1">
+        <a class="btn" href="mailto:hello@kelenmcdonald.com?subject=Project%20inquiry">
+          Start a project
+          <svg width="18" height="12" viewBox="0 0 18 12" fill="none" aria-hidden="true">
+            <path d="M0 6h16M11.5 1L16.5 6l-5 5" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </a>
+        <p class="fallback">Or copy the address: <a href="mailto:hello@kelenmcdonald.com">hello@kelenmcdonald.com</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p class="mono">© 2026 Kelen McDonald</p>
+    <p class="mono"><a href="mailto:hello@kelenmcdonald.com">hello@kelenmcdonald.com</a></p>
+    <p class="mono sp">Hand-built · No templates</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var d=document.documentElement;
+  d.classList.add('js');
+
+  /* live local-time readout */
+  var el=document.getElementById('clock'), z=document.getElementById('tz');
+  function pad(n){return n<10?'0'+n:''+n;}
+  function tick(){
+    var t=new Date();
+    el.textContent=pad(t.getHours())+':'+pad(t.getMinutes())+':'+pad(t.getSeconds());
+  }
+  if(el){ tick(); setInterval(tick,1000); }
+  if(z){
+    try{
+      var parts=new Intl.DateTimeFormat(undefined,{timeZoneName:'short'}).formatToParts(new Date());
+      for(var i=0;i<parts.length;i++){ if(parts[i].type==='timeZoneName'){ z.textContent=parts[i].value; } }
+    }catch(e){ z.textContent=''; }
+  }
+
+  /* scroll reveal — defaults visible, JS-gated only */
+  var items=document.querySelectorAll('.rv, .hero .accent-rule');
+  function showAll(){ for(var i=0;i<items.length;i++){ items[i].classList.add('in'); } }
+
+  if(!('IntersectionObserver' in window)){ showAll(); return; }
+
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  },{rootMargin:'0px 0px -8% 0px',threshold:0.05});
+
+  for(var i=0;i<items.length;i++){ io.observe(items[i]); }
+  /* hard safety net: nothing stays hidden if anything above misbehaves */
+  setTimeout(showAll,2500);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Kelen McDonald — Web Design Studio</title>
+<meta name="description" content="A one-person web design studio. Brand identity, web design, and hand-built development for small businesses and independent creators.">
+<meta name="color-scheme" content="light">
+
+<!-- Social preview — update the domain in these URLs once deployed -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kelenmcdonald.com/">
+<meta property="og:title" content="Kelen McDonald — Web Design Studio">
+<meta property="og:description" content="A one-person web design studio. Brand identity, web design, and hand-built development for small businesses and independent creators.">
+<meta property="og:image" content="https://kelenmcdonald.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kelen McDonald — Web Design Studio">
+<meta name="twitter:description" content="A one-person web design studio. Brand identity, web design, and hand-built development for small businesses and independent creators.">
+<meta name="twitter:image" content="https://kelenmcdonald.com/assets/og-image.jpg">
+<meta name="theme-color" content="#EFE7D8">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────────────────
+   Tokens
+   ───────────────────────────────────────────────────────── */
+:root{
+  /* Ground — raw linen / unbleached paper, not cream */
+  --linen:        #EFE7D8;
+  --linen-deep:   #E4DAC7;   /* recessed bands  */
+  --linen-lift:   #F5EFE3;   /* lifted surfaces */
+  --paper-hi:     #FBF7EF;   /* text on clay    */
+
+  /* Ink — warm near-black brown */
+  --ink:          #2A231B;
+  --ink-soft:     #5E5344;   /* 6.1:1 on linen  */
+  --ink-faint:    #8A7C69;   /* rules / hairlines only */
+
+  /* Accent A — clay */
+  --clay:         #BE6A3E;   /* 3.2:1 — large text, marks, borders ONLY */
+  --clay-fill:    #B0592D;   /* button fill, 4.6:1 with --paper-hi */
+  --clay-ink:     #9C4E26;   /* 4.8:1 on linen — safe for small text */
+
+  /* Accent B — moss */
+  --moss:         #5C6A48;   /* 4.7:1 on linen — safe for small text */
+  --moss-deep:    #475237;
+  --moss-faint:   #B8BCA6;   /* rules only */
+
+  --font-sans: 'Instrument Sans', system-ui, sans-serif;
+  --font-serif:'Newsreader', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --r-sm: 2px;
+  --r-md: 4px;
+  --r-lg: 6px;
+
+  --ease: cubic-bezier(.16,.72,.24,1);
+  --dur:  560ms;
+
+  --wrap: 1120px;
+  --gut:  40px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   Reset & base
+   ───────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:104px}
+body{
+  font-family:var(--font-sans);
+  font-size:1rem;
+  line-height:1.62;
+  color:var(--ink);
+  background-color:var(--linen);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  padding-left:env(safe-area-inset-left);
+  padding-right:env(safe-area-inset-right);
+}
+img,svg{display:block;max-width:100%}
+ul,ol{list-style:none}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,h4{font-weight:600;line-height:1.08;letter-spacing:-.03em;text-wrap:balance;overflow-wrap:break-word}
+p{text-wrap:pretty}
+
+/* Paper grain — a texture, not a gradient. Fixed so it reads as the sheet itself. */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.45;
+  mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='0.28'/%3E%3C/svg%3E");
+}
+body>*{position:relative;z-index:1}
+
+/* ─────────────────────────────────────────────────────────
+   Focus
+   ───────────────────────────────────────────────────────── */
+:focus{outline:none}
+:focus-visible{
+  outline:2px solid var(--moss);
+  outline-offset:4px;
+  border-radius:var(--r-sm);
+}
+.btn:focus-visible{outline-color:var(--ink)}
+
+.skip{
+  position:absolute;left:12px;top:-72px;
+  background:var(--ink);color:var(--paper-hi);
+  padding:.7rem 1.1rem;border-radius:var(--r-md);
+  font-size:.9rem;font-weight:500;z-index:60;
+  transition:top 200ms var(--ease);
+}
+.skip:focus-visible{top:12px}
+
+/* ─────────────────────────────────────────────────────────
+   Layout primitives
+   ───────────────────────────────────────────────────────── */
+.wrap{width:100%;max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gut)}
+
+/* Section shell: narrow label column beside the heading (never above it) */
+.band{padding-block:clamp(72px,10vw,132px)}
+.band--sunk{background-color:var(--linen-deep)}
+
+.sec-head{
+  display:grid;
+  grid-template-columns:140px minmax(0,1fr);
+  gap:0 32px;
+  align-items:baseline;
+  margin-bottom:clamp(40px,5vw,64px);
+}
+.sec-label{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  font-weight:500;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--moss);
+  padding-top:.55em;
+}
+.sec-head h2{
+  font-size:clamp(1.65rem,3.4vw,2.7rem);
+  max-width:20ch;
+}
+.sec-head .sec-note{
+  grid-column:2;
+  margin-top:18px;
+  max-width:31rem;
+  color:var(--ink-soft);
+  font-size:1.0625rem;
+}
+
+/* ─────────────────────────────────────────────────────────
+   Buttons & links
+   ───────────────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:1rem;font-weight:600;letter-spacing:.005em;
+  padding:.86rem 1.35rem;
+  border-radius:var(--r-md);
+  background-color:var(--clay-fill);
+  color:var(--paper-hi);
+  border:1px solid var(--clay-ink);
+  box-shadow:0 3px 8px rgba(60,38,20,.16), 0 12px 26px -10px rgba(60,38,20,.34);
+  transition:transform var(--dur) var(--ease),
+             box-shadow var(--dur) var(--ease),
+             background-color var(--dur) var(--ease);
+}
+.btn:active{background-color:var(--clay-ink);transform:translateY(0)}
+.btn .arw{transition:transform var(--dur) var(--ease)}
+
+.btn--sm{padding:.56rem 1rem;font-size:.9375rem}
+
+.tlink{
+  display:inline-flex;align-items:center;gap:.45rem;
+  color:var(--moss);
+  font-weight:500;
+  border-bottom:1px solid var(--moss-faint);
+  padding-bottom:2px;
+  transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease);
+}
+.tlink:active{color:var(--moss-deep);border-bottom-color:var(--moss)}
+
+.mailto-plain{
+  font-family:var(--font-mono);
+  font-size:.875rem;
+  color:var(--ink-soft);
+}
+.mailto-plain a{
+  color:var(--clay-ink);
+  border-bottom:1px solid rgba(156,78,38,.4);
+  overflow-wrap:anywhere;
+  transition:border-color var(--dur) var(--ease);
+}
+.mailto-plain a:active{border-bottom-color:var(--clay-ink)}
+
+/* ─────────────────────────────────────────────────────────
+   Header
+   ───────────────────────────────────────────────────────── */
+.site-head{
+  position:sticky;top:0;z-index:50;
+  background-color:var(--linen);
+  border-bottom:1px solid transparent;
+  padding-top:env(safe-area-inset-top);
+  transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
+}
+.site-head.is-stuck{
+  border-bottom-color:var(--moss-faint);
+  box-shadow:0 6px 20px -14px rgba(60,38,20,.5);
+}
+.head-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;
+  min-height:76px;
+  padding-block:14px;
+}
+.brand{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-weight:600;font-size:1.0625rem;letter-spacing:-.025em;
+  white-space:nowrap;
+  min-width:0;
+}
+.brand .mark{flex:none;color:var(--clay-ink)}
+.brand span:not(.sub){white-space:normal;overflow-wrap:anywhere}
+.brand .sub{
+  font-family:var(--font-mono);
+  font-size:.72rem;font-weight:400;letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--moss);
+  border-left:1px solid var(--moss-faint);
+  padding-left:.6rem;
+  margin-left:.1rem;
+}
+.nav{display:flex;align-items:center;justify-content:flex-end;gap:28px;flex-wrap:wrap;row-gap:10px}
+.nav-links{display:flex;align-items:center;gap:26px;flex-wrap:wrap;row-gap:8px}
+.nav-links a{
+  font-size:.9375rem;font-weight:500;
+  color:var(--ink-soft);
+  padding-block:4px;
+  border-bottom:1px solid transparent;
+  transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease);
+}
+.nav-links a:active{color:var(--ink);border-bottom-color:var(--clay)}
+.cta-short{display:none}
+
+/* ─────────────────────────────────────────────────────────
+   Hero
+   ───────────────────────────────────────────────────────── */
+.hero{padding-block:clamp(60px,9vw,116px) clamp(72px,10vw,128px)}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  gap:clamp(40px,6vw,88px);
+  align-items:center;
+}
+.hero h1{
+  font-size:clamp(2.4rem,5.6vw,4.25rem);
+  letter-spacing:-.038em;
+  word-spacing:.04em;
+  line-height:1.03;
+  max-width:15ch;
+}
+/* The one authored accent mark — a hand-drawn ink stroke under a single word */
+.swash{position:relative;display:inline-block;white-space:nowrap}
+.swash svg{
+  position:absolute;
+  left:-1.5%;bottom:-.24em;
+  width:96%;height:auto;
+  color:var(--clay);
+  overflow:visible;
+}
+.swash svg path{
+  stroke-dasharray:320;
+  stroke-dashoffset:0;
+}
+html.js .swash svg path{
+  stroke-dashoffset:320;
+  animation:draw 900ms var(--ease) 420ms forwards;
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+.hero-lede{
+  margin-top:clamp(24px,3vw,32px);
+  font-size:clamp(1.0625rem,1.5vw,1.1875rem);
+  line-height:1.66;
+  color:var(--ink-soft);
+  max-width:46ch;
+}
+.hero-cta{
+  margin-top:clamp(30px,4vw,42px);
+  display:flex;align-items:center;gap:28px;flex-wrap:wrap;
+}
+.hero-fallback{margin-top:16px}
+.hero-avail{
+  margin-top:clamp(34px,4.5vw,48px);
+  padding-top:20px;
+  border-top:1px solid var(--moss-faint);
+  font-size:.9375rem;
+  color:var(--ink-soft);
+  max-width:44ch;
+}
+.hero-avail .dot{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background-color:var(--moss);margin-right:.55rem;vertical-align:.08em;
+}
+
+/* Authored materials plate — colour, type and grid: the three raw materials */
+.plate{
+  --plate-rot:-1.1deg;
+  border:1px solid var(--ink-faint);
+  border-radius:var(--r-lg);
+  background-color:var(--linen-lift);
+  padding:22px;
+  box-shadow:0 4px 14px rgba(60,38,20,.08), 0 26px 50px -28px rgba(60,38,20,.35);
+  transform:rotate(var(--plate-rot));
+}
+.plate figcaption{
+  margin-top:16px;padding-top:14px;
+  border-top:1px solid var(--moss-faint);
+  font-family:var(--font-mono);
+  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--moss);
+  display:flex;justify-content:space-between;gap:12px;
+}
+.plate-frame{
+  display:block;
+  overflow:hidden;
+  border-radius:var(--r-md);
+  aspect-ratio:733/1100;
+}
+.plate-frame img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:50% 18%;
+}
+@supports not (aspect-ratio:1/1){
+  .plate-frame,.plate-frame img{height:auto}
+}
+
+/* ─────────────────────────────────────────────────────────
+   Services — a stacked list, not a card grid
+   ───────────────────────────────────────────────────────── */
+.svc-list{border-top:1px solid var(--moss-faint)}
+.svc{
+  display:grid;
+  grid-template-columns:140px 40px minmax(0,1fr);
+  gap:0 32px;
+  align-items:start;
+  padding-block:clamp(34px,4.4vw,52px);
+  border-bottom:1px solid var(--moss-faint);
+}
+.svc-idx{
+  font-family:var(--font-mono);
+  font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-soft);
+  padding-top:.5em;
+}
+.svc-mark{color:var(--moss);padding-top:.15em}
+.svc h3{
+  font-size:clamp(1.3rem,2.2vw,1.65rem);
+  letter-spacing:-.028em;
+}
+.svc-copy p{
+  margin-top:12px;
+  color:var(--ink-soft);
+  max-width:34rem;
+  font-size:1.0625rem;
+}
+.svc-copy p em{
+  font-style:normal;
+  color:var(--ink);
+  font-weight:600;
+}
+
+/* ─────────────────────────────────────────────────────────
+   Work — asymmetric alternating entries, honestly labelled
+   ───────────────────────────────────────────────────────── */
+.concept-note{
+  display:flex;align-items:flex-start;gap:14px;
+  max-width:36rem;
+  margin-left:172px;
+  padding:18px 20px;
+  border:1px solid var(--clay);
+  border-radius:var(--r-md);
+  background-color:rgba(190,106,62,.07);
+  margin-bottom:clamp(44px,5.5vw,68px);
+}
+.concept-note svg{flex:none;color:var(--clay-ink);margin-top:2px}
+.concept-note p{font-size:.9375rem;color:var(--ink);line-height:1.6}
+.concept-note strong{font-weight:600}
+
+.work-item{
+  display:grid;
+  grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:clamp(28px,4.5vw,64px);
+  align-items:center;
+  padding-block:clamp(38px,5vw,62px);
+  border-top:1px solid var(--moss-faint);
+}
+.work-item:first-of-type{border-top:0;padding-top:0}
+.work-item:nth-of-type(even){grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.work-item:nth-of-type(even) .work-plate{order:2}
+.work-item:nth-of-type(even) .work-body{order:1}
+
+.work-plate{
+  border:1px solid var(--ink-faint);
+  border-radius:var(--r-md);
+  background-color:var(--linen-lift);
+  overflow:hidden;
+  transition:box-shadow var(--dur) var(--ease),border-color var(--dur) var(--ease);
+  box-shadow:0 2px 8px rgba(60,38,20,.07), 0 18px 40px -26px rgba(60,38,20,.3);
+}
+.work-plate svg{width:100%;height:auto}
+
+.badge{
+  display:inline-flex;align-items:center;gap:.42rem;
+  font-family:var(--font-mono);
+  font-size:.72rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  background-color:var(--clay-ink);
+  color:var(--paper-hi);
+  padding:.36rem .62rem;
+  border-radius:var(--r-sm);
+}
+.badge svg{flex:none}
+.work-meta{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.work-meta .meta{
+  font-family:var(--font-mono);
+  font-size:.78rem;letter-spacing:.09em;
+  color:var(--ink-soft);
+}
+.work-body h3{
+  font-size:clamp(1.5rem,2.8vw,2.05rem);
+  letter-spacing:-.032em;
+}
+.work-body p{
+  margin-top:14px;
+  color:var(--ink-soft);
+  font-size:1.0625rem;
+  max-width:30rem;
+}
+.work-tags{
+  display:flex;gap:8px;flex-wrap:wrap;
+  margin-top:20px;
+}
+.work-tags li{
+  font-family:var(--font-mono);
+  font-size:.72rem;letter-spacing:.08em;
+  color:var(--moss);
+  border:1px solid var(--moss-faint);
+  border-radius:var(--r-sm);
+  padding:.24rem .5rem;
+  max-width:100%;
+  overflow-wrap:anywhere;
+}
+
+/* ─────────────────────────────────────────────────────────
+   Pull quote — the single serif moment on the page
+   ───────────────────────────────────────────────────────── */
+.quote-band{padding-block:clamp(48px,6vw,80px)}
+.quote{
+  margin-inline:auto;
+  text-align:center;
+}
+.quote blockquote{
+  font-family:var(--font-serif);
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(1.7rem,4vw,2.75rem);
+  line-height:1.2;
+  letter-spacing:-.018em;
+  color:var(--ink);
+  text-wrap:balance;
+  max-width:29ch;
+  margin-inline:auto;
+}
+.quote figcaption{
+  margin-top:26px;
+  font-family:var(--font-mono);
+  font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--moss);
+}
+.quote .qmark{margin:0 auto 22px;color:var(--clay)}
+
+/* ─────────────────────────────────────────────────────────
+   About
+   ───────────────────────────────────────────────────────── */
+.about-grid{
+  display:grid;
+  grid-template-columns:140px minmax(0,1fr) minmax(0,320px);
+  column-gap:32px;
+  row-gap:0;
+  align-items:start;
+}
+.about-grid .sec-head{
+  grid-column:1 / span 2;
+  grid-row:1;
+  margin-bottom:26px;
+}
+.about-body{
+  grid-column:1 / span 2;
+  grid-row:2;
+}
+.about-body p{
+  font-size:1.0625rem;
+  line-height:1.7;
+  color:var(--ink-soft);
+  max-width:33rem;
+}
+.about-body p + p{margin-top:18px}
+.about-body p strong{color:var(--ink);font-weight:600}
+.about-side{
+  grid-column:3;
+  grid-row:1 / span 2;
+  border:1px solid var(--moss-faint);
+  border-radius:var(--r-md);
+  padding:22px;
+  background-color:var(--linen-lift);
+}
+.about-side dt{
+  font-family:var(--font-mono);
+  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--moss);
+  margin-bottom:5px;
+}
+.about-side dd{font-size:.9375rem;color:var(--ink);line-height:1.5}
+.about-side dd + dt{margin-top:18px;padding-top:18px;border-top:1px solid var(--moss-faint)}
+
+/* ─────────────────────────────────────────────────────────
+   Contact
+   ───────────────────────────────────────────────────────── */
+.contact-inner{
+  display:grid;
+  grid-template-columns:140px minmax(0,1fr);
+  gap:0 32px;
+  align-items:start;
+}
+.contact-inner .sec-head{grid-column:1 / -1;margin-bottom:22px}
+.contact-inner .sec-head h2{
+  font-size:clamp(1.8rem,4vw,3.1rem);
+  letter-spacing:-.035em;
+  max-width:16ch;
+}
+.contact-body{grid-column:1 / -1;max-width:60ch}
+.contact-body > p{
+  margin-top:22px;
+  font-size:1.0625rem;
+  color:var(--ink-soft);
+  max-width:48ch;
+}
+.contact-act{
+  margin-top:clamp(30px,4vw,40px);
+  display:flex;flex-direction:column;align-items:flex-start;gap:14px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   Footer
+   ───────────────────────────────────────────────────────── */
+.site-foot{
+  border-top:1px solid var(--moss-faint);
+  padding-block:34px 44px;
+  padding-bottom:max(44px,env(safe-area-inset-bottom));
+}
+.foot-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:18px;flex-wrap:wrap;
+}
+.foot-inner p,.foot-inner a{
+  font-family:var(--font-mono);
+  font-size:.78rem;letter-spacing:.06em;
+  color:var(--ink-soft);
+}
+.foot-inner a{
+  color:var(--clay-ink);
+  border-bottom:1px solid rgba(156,78,38,.35);
+  transition:border-color var(--dur) var(--ease);
+}
+.foot-inner a:active{border-bottom-color:var(--clay-ink)}
+
+/* ─────────────────────────────────────────────────────────
+   Scroll reveal — visible by default, JS only ever hides
+   ───────────────────────────────────────────────────────── */
+html.js .rv{
+  opacity:0;
+  transform:translateY(14px);
+  transition:opacity 640ms var(--ease),transform 640ms var(--ease);
+}
+html.js .rv.in{opacity:1;transform:none}
+
+/* Focal moment: the hero photo settles into its resting tilt as it arrives —
+   a photograph being set down at an angle, not lifted off a shelf. Scoped to
+   .plate so the generic reveal above stays untouched everywhere else. */
+html.js .plate.rv{
+  transform:translateY(14px) rotate(calc(var(--plate-rot) * 3)) scale(.97);
+  transition:opacity 700ms var(--ease),transform 700ms var(--ease);
+}
+html.js .plate.rv.in{transform:rotate(var(--plate-rot))}
+
+/* Light sibling stagger: Work items and Service rows read as lists, not a
+   simultaneous block. Capped at 140ms total across three. */
+html.js .work-item.rv:nth-of-type(2),
+html.js .svc.rv:nth-of-type(2){transition-delay:70ms}
+html.js .work-item.rv:nth-of-type(3),
+html.js .svc.rv:nth-of-type(3){transition-delay:140ms}
+
+/* ─────────────────────────────────────────────────────────
+   Touch & pointer — hover only where hover is real; touch
+   gets its own :active feedback (defined above) and larger
+   targets. Prevents the "sticky hover" bug after a tap.
+   ───────────────────────────────────────────────────────── */
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{
+    background-color:var(--clay-ink);
+    transform:translateY(-1px);
+    box-shadow:0 5px 12px rgba(60,38,20,.18), 0 18px 34px -12px rgba(60,38,20,.4);
+  }
+  .btn:hover .arw{transform:translateX(3px)}
+  .tlink:hover{color:var(--moss-deep);border-bottom-color:var(--moss)}
+  .mailto-plain a:hover{border-bottom-color:var(--clay-ink)}
+  .nav-links a:hover{color:var(--ink);border-bottom-color:var(--clay)}
+  .foot-inner a:hover{border-bottom-color:var(--clay-ink)}
+  .work-item:hover .work-plate{
+    border-color:var(--moss);
+    box-shadow:0 4px 12px rgba(60,38,20,.1), 0 24px 48px -26px rgba(60,38,20,.38);
+  }
+}
+
+@media (pointer:coarse){
+  .nav-links a{padding-block:11px}
+  .tlink{padding-block:8px}
+  .nav .btn--sm{padding-block:.68rem}
+}
+
+/* ─────────────────────────────────────────────────────────
+   Responsive
+   ───────────────────────────────────────────────────────── */
+@media (max-width:1000px){
+  :root{--gut:32px}
+  .about-grid{grid-template-columns:140px minmax(0,1fr)}
+  .about-side{grid-column:2;grid-row:auto;margin-top:34px;max-width:420px}
+}
+
+@media (max-width:820px){
+  .hero-grid{grid-template-columns:minmax(0,1fr);gap:48px}
+  .plate{max-width:440px;--plate-rot:-.8deg}
+  .work-item,
+  .work-item:nth-of-type(even){grid-template-columns:minmax(0,1fr);gap:26px}
+  .work-item:nth-of-type(even) .work-plate,
+  .work-item:nth-of-type(even) .work-body{order:0}
+}
+
+@media (max-width:800px){
+  html{scroll-padding-top:132px}
+  .head-inner{
+    flex-direction:column;align-items:flex-start;
+    gap:12px;min-height:0;padding-block:14px 12px;
+  }
+  .nav{width:100%;justify-content:space-between;gap:14px}
+  .nav-links{gap:20px}
+  .brand .sub{display:none}
+  /* Keep the header to two compact rows: a tall sticky bar eats the viewport. */
+  .nav .btn--sm{padding:.5rem .8rem;font-size:.875rem;gap:.4rem}
+  .nav .btn--sm .arw{display:none}
+}
+
+@media (max-width:720px){
+  :root{--gut:22px}
+
+  /* label column collapses: label sits inline, still never a stacked eyebrow */
+  .sec-head{grid-template-columns:minmax(0,1fr);gap:10px 0}
+  .sec-head .sec-label{padding-top:0;order:2}
+  .sec-head h2{order:1}
+  .sec-head .sec-note{grid-column:1;order:3;margin-top:6px}
+  .concept-note{margin-left:0}
+
+  .svc{grid-template-columns:32px minmax(0,1fr);gap:0 18px;column-gap:18px}
+  .svc-idx{
+    grid-column:2;grid-row:1;padding-top:0;
+    font-size:.68rem;margin-bottom:6px;
+  }
+  .svc-mark{grid-column:1;grid-row:1/span 2;padding-top:.1em}
+  .svc-copy{grid-column:2;grid-row:2}
+
+  .about-grid{grid-template-columns:minmax(0,1fr)}
+  .about-grid .sec-head,.about-body,.about-side{grid-column:1;grid-row:auto}
+  .about-side{margin-top:34px}
+  .contact-inner{grid-template-columns:minmax(0,1fr);gap:22px}
+}
+
+@media (max-width:560px){
+  .nav-links{gap:16px}
+  .nav-links a{font-size:.875rem}
+}
+
+@media (max-width:480px){
+  .quote blockquote{max-width:100%}
+  .plate{padding:16px}
+  .foot-inner{flex-direction:column;align-items:flex-start;gap:8px}
+}
+
+@media (max-width:360px){
+  :root{--gut:18px}
+  .brand{font-size:.9875rem}
+  .nav{gap:10px}
+  .nav-links{gap:12px}
+  .nav-links a{font-size:.8125rem}
+  .nav .cta-full{display:none}
+  .nav .cta-short{display:inline}
+  .nav .btn--sm{padding:.5rem .65rem}
+  .work-meta{gap:10px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:1ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:1ms !important;
+  }
+  html.js .rv{opacity:1;transform:none;transition-delay:0ms !important}
+  html.js .plate.rv{transform:rotate(var(--plate-rot))}
+  html.js .swash svg path{stroke-dashoffset:0;animation:none}
+}
+
+@media print{
+  body::before{display:none}
+  .site-head{position:static;padding-top:0}
+  .skip,.nav-links,.nav .btn--sm{display:none}
+  .btn,.plate,.work-plate,.about-side{box-shadow:none}
+  a{text-decoration:underline}
+}
+</style>
+</head>
+<body id="top">
+<!--
+  ═══ DIRECTION CONTRACT ═══════════════════════════════════════════════
+  THESIS: Prove craft through material warmth and human ease rather than
+  corporate polish — a small, well-run atelier, not a brochure.
+
+  OWN-WORLD: Raw-linen ground (#EFE7D8) with a real paper grain, warm
+  near-black brown ink (#2A231B), and a DUAL accent system — clay
+  (#BE6A3E) for primary action and emphasis, moss (#5C6A48) for tags,
+  rules and secondary links. Display and body are both Instrument Sans, a
+  warm humanist geometric; Newsreader italic appears exactly once, as a
+  pull quote. IBM Plex Mono is reserved for genuinely data-like content.
+  Radii 2–6px, soft offset shadows, no gradients, no glass, no stock
+  photography — every mark is authored inline SVG.
+
+  STORY: A prospect feels invited in, senses care without cheapness, reads
+  the concept work honestly labelled as speculative, and writes an email
+  feeling like a person rather than a lead in a funnel.
+
+  FIRST VIEWPORT: An intimate, asymmetric hero on linen — a confident
+  human headline in Instrument Sans, one hand-drawn ink swash under a
+  single word, a clay-filled CTA with real soft depth, its plain-text
+  email fallback directly beneath, and a moss secondary link.
+
+  FORM: v3 of 3 parallel explorations — "warm simplistic nice UI vibe,"
+  deliberately avoiding the cream + high-contrast-serif + lone-terracotta
+  cliché via the clay/moss pairing and a sans primary display voice.
+  ══════════════════════════════════════════════════════════════════════
+-->
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head" id="siteHead">
+  <div class="wrap head-inner">
+    <a class="brand" href="#top">
+      <svg class="mark" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M10 1.6v16.8M2.6 5.8l14.8 8.4M17.4 5.8L2.6 14.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span>Kelen McDonald</span>
+      <span class="sub">Web Design Studio</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      <a class="btn btn--sm" href="#contact">
+        <span class="cta-full">Start a project</span>
+        <span class="cta-short">Contact</span>
+        <svg class="arw" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ── Hero ─────────────────────────────────────────────────────── -->
+  <section class="hero band" aria-labelledby="hero-h">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1 id="hero-h" class="rv">
+          Websites made
+          <span class="swash">by hand,<svg viewBox="0 0 300 16" fill="none" aria-hidden="true" preserveAspectRatio="none">
+            <path d="M3 11.4c34-5.1 74.6-7.9 121.4-8.2 46.9-.3 96.2 2 152.6 6.9" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+          </svg></span>
+          one at a time.
+        </h1>
+        <p class="hero-lede rv">
+          I'm Kelen McDonald. I design and build sites for small businesses and
+          independent creators. Bespoke work, not a template with your logo
+          swapped in.
+        </p>
+        <div class="hero-cta rv">
+          <a class="btn" href="mailto:contact@kelenmcdonald.com">
+            Start a project
+            <svg class="arw" width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a class="tlink" href="#work">
+            See the work
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <p class="mailto-plain hero-fallback rv">
+          Or write to <a href="mailto:contact@kelenmcdonald.com">contact@kelenmcdonald.com</a>
+        </p>
+        <p class="hero-avail rv">
+          <span class="dot" aria-hidden="true"></span>Taking on a small number of new
+          projects. Remote, clients anywhere.
+        </p>
+      </div>
+
+      <figure class="plate rv" aria-labelledby="plate-cap">
+        <span class="plate-frame">
+          <img src="assets/kelen.jpg" width="733" height="1100" alt="Kelen McDonald, outdoors, smiling.">
+        </span>
+        <figcaption id="plate-cap">
+          <span>Kelen McDonald</span>
+          <span>Founder &amp; designer</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ── Work ─────────────────────────────────────────────────────── -->
+  <section class="band band--sunk" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="sec-label">Selected work</p>
+        <h2 id="work-h">Three projects, built to show range</h2>
+        <p class="sec-note">
+          Designed and built end to end: identity, layout, and the code that
+          ships it.
+        </p>
+      </div>
+
+      <div class="concept-note rv">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="7.4" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M9 5.4v4.4M9 12.6h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+        <p>
+          <strong>All three are self-directed concept projects</strong>: speculative
+          pieces I designed and built to demonstrate range. They are not completed
+          client engagements, and nothing here reports real client results.
+        </p>
+      </div>
+
+      <div class="work-list">
+
+        <article class="work-item rv">
+          <div class="work-plate">
+            <svg viewBox="0 0 400 300" role="img" aria-label="Concept illustration for Marrow Coffee Roasters: concentric roast rings over a warm banded ground.">
+              <rect width="400" height="300" fill="#F5EFE3"/>
+              <g stroke="#BE6A3E" fill="none" stroke-width="1.4">
+                <circle cx="200" cy="150" r="26"/><circle cx="200" cy="150" r="46"/>
+                <circle cx="200" cy="150" r="66"/><circle cx="200" cy="150" r="86"/>
+                <circle cx="200" cy="150" r="106"/><circle cx="200" cy="150" r="126"/>
+              </g>
+              <path d="M200 24v252" stroke="#9C4E26" stroke-width="1.4"/>
+              <path d="M200 44c22 26 22 80 0 106-22 26-22 80 0 106" stroke="#5C6A48" stroke-width="1.6" fill="none"/>
+              <g stroke="#5E5344" stroke-width="1.2" opacity=".55">
+                <path d="M28 44h58M28 256h58M314 44h58M314 256h58"/>
+              </g>
+              <text x="28" y="34" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5E5344" letter-spacing="1.6">SINGLE ORIGIN</text>
+            </svg>
+          </div>
+          <div class="work-body">
+            <div class="work-meta">
+              <span class="badge">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                  <path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+                Concept project
+              </span>
+              <span class="meta">2026 · Brand + Web design</span>
+            </div>
+            <h3>Marrow Coffee Roasters</h3>
+            <p>
+              A single-origin roastery site built around a warm, tactile identity,
+              carried through to an online ordering flow.
+            </p>
+            <ul class="work-tags">
+              <li>Identity</li><li>Web design</li><li>Ordering flow</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="work-item rv">
+          <div class="work-plate">
+            <svg viewBox="0 0 400 300" role="img" aria-label="Concept illustration for Faraday Studio: a thin-line architectural elevation with a stepped roof and column grid.">
+              <rect width="400" height="300" fill="#F5EFE3"/>
+              <g stroke="#5C6A48" fill="none" stroke-width="1.4">
+                <path d="M40 250h320"/>
+                <path d="M76 250V128l64-42 64 42v122"/>
+                <path d="M204 250V160l60-34 60 34v90"/>
+                <path d="M76 168h128M204 196h120"/>
+                <path d="M108 250v-46h28v46M172 250v-46h-28"/>
+                <path d="M240 250v-38h30v38"/>
+              </g>
+              <g stroke="#BE6A3E" stroke-width="1.4">
+                <path d="M40 268h320M40 262v12M360 262v12"/>
+              </g>
+              <g stroke="#8A7C69" stroke-width="1" opacity=".5">
+                <path d="M76 40v210M140 40v50M204 40v120M264 40v90M324 40v170"/>
+              </g>
+              <text x="40" y="34" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5E5344" letter-spacing="1.6">ELEVATION · 1:100</text>
+            </svg>
+          </div>
+          <div class="work-body">
+            <div class="work-meta">
+              <span class="badge">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                  <path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+                Concept project
+              </span>
+              <span class="meta">2026 · Web design</span>
+            </div>
+            <h3>Faraday Studio</h3>
+            <p>
+              A portfolio site for a two-person architecture practice, built so the
+              project photography leads and the interface stays out of the way.
+            </p>
+            <ul class="work-tags">
+              <li>Art direction</li><li>Layout system</li><li>Web design</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="work-item rv">
+          <div class="work-plate">
+            <svg viewBox="0 0 400 300" role="img" aria-label="Concept illustration for Loom and Line: an interlaced weave of clay and moss threads forming a textile swatch.">
+              <rect width="400" height="300" fill="#F5EFE3"/>
+              <g stroke="#BE6A3E" stroke-width="7" stroke-linecap="square">
+                <path d="M64 40v220M104 40v220M144 40v220M184 40v220M224 40v220M264 40v220M304 40v220M344 40v220"/>
+              </g>
+              <g stroke="#5C6A48" stroke-width="7" stroke-linecap="square">
+                <path d="M44 64h32M104 64h40M184 64h40M264 64h40M344 64h20"/>
+                <path d="M44 104h12M84 104h40M164 104h40M244 104h40M324 104h40"/>
+                <path d="M44 144h32M104 144h40M184 144h40M264 144h40M344 144h20"/>
+                <path d="M44 184h12M84 184h40M164 184h40M244 184h40M324 184h40"/>
+                <path d="M44 224h32M104 224h40M184 224h40M264 224h40M344 224h20"/>
+              </g>
+              <rect x="44" y="40" width="320" height="220" fill="none" stroke="#5E5344" stroke-width="1.2" opacity=".55"/>
+              <text x="44" y="284" font-family="IBM Plex Mono, monospace" font-size="11" fill="#5E5344" letter-spacing="1.6">SMALL BATCH · SWATCH 04</text>
+            </svg>
+          </div>
+          <div class="work-body">
+            <div class="work-meta">
+              <span class="badge">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                  <path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+                Concept project
+              </span>
+              <span class="meta">2026 · E-commerce</span>
+            </div>
+            <h3>Loom &amp; Line</h3>
+            <p>
+              A small-batch textile shop with a product grid designed to feel like
+              flipping through a printed catalog.
+            </p>
+            <ul class="work-tags">
+              <li>E-commerce</li><li>Product grid</li><li>Web design</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Services ─────────────────────────────────────────────────── -->
+  <section class="band" id="services" aria-labelledby="svc-h">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="sec-label">What I do</p>
+        <h2 id="svc-h">Three things, done properly</h2>
+        <p class="sec-note">
+          Most projects use all three. Some only need one, and that's fine too.
+        </p>
+      </div>
+
+      <div class="svc-list">
+
+        <article class="svc rv">
+          <p class="svc-idx">Brand identity</p>
+          <svg class="svc-mark" width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+            <circle cx="11.5" cy="11.5" r="8" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="18.5" cy="18.5" r="8" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <div class="svc-copy">
+            <h3>A visual language, not just a logo</h3>
+            <p>
+              Logo, color, and type worked out together, so the identity
+              <em>holds up across every page</em> instead of falling apart the
+              moment it leaves the letterhead.
+            </p>
+          </div>
+        </article>
+
+        <article class="svc rv">
+          <p class="svc-idx">Web design</p>
+          <svg class="svc-mark" width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+            <rect x="3.5" y="3.5" width="23" height="23" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M3.5 11h23M11 11v15.5" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <div class="svc-copy">
+            <h3>Wireframes through to high fidelity</h3>
+            <p>
+              It starts with what the site actually needs to do. Structure first,
+              then the surface — <em>every screen designed, not assembled</em>
+              from parts that happened to be lying around.
+            </p>
+          </div>
+        </article>
+
+        <article class="svc rv">
+          <p class="svc-idx">Development</p>
+          <svg class="svc-mark" width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+            <path d="M5 4v21h21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 25 25 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M5 18h5M12 25v-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <div class="svc-copy">
+            <h3>Built by hand, fast and responsive</h3>
+            <p>
+              Written from scratch, with <em>no page-builder plugins and no
+              bloated templates</em>. The result is a site that loads quickly, works on
+              every screen, and can be changed without fighting it.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pull quote (the single serif moment) ─────────────────────── -->
+  <section class="band--sunk quote-band" aria-label="Working principle">
+    <div class="wrap">
+      <figure class="quote rv">
+        <svg class="qmark" width="34" height="14" viewBox="0 0 34 14" fill="none" aria-hidden="true">
+          <path d="M1 13C6 6.5 12 2.5 17 2.5S28 6.5 33 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <blockquote>
+          Understanding what the site actually needs to do, for the people who'll
+          actually use it.
+        </blockquote>
+        <figcaption>How every project starts</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ── About ────────────────────────────────────────────────────── -->
+  <section class="band" id="about" aria-labelledby="about-h">
+    <div class="wrap about-grid">
+      <div class="sec-head rv">
+        <p class="sec-label">About</p>
+        <h2 id="about-h">Hi, I'm Kelen McDonald</h2>
+      </div>
+      <div class="about-body rv">
+        <p>
+          I design and build websites for small businesses and independent
+          creators. Every project starts the same way: understanding what the
+          site actually needs to do, for the people who'll actually use it.
+        </p>
+        <p>
+          Then I sketch, design, and build it by hand — <strong>no drag-and-drop
+          templates standing between your business and how it looks online</strong>.
+        </p>
+        <p>
+          &ldquo;Studio&rdquo; is framing, not a team. It&rsquo;s me, start to
+          finish, which is also why I keep the list of projects short.
+        </p>
+      </div>
+      <dl class="about-side rv">
+        <dt>Response time</dt>
+        <dd>I read and reply to every message myself, usually within a couple of days.</dd>
+        <dt>Where</dt>
+        <dd>Remote-first. Clients anywhere, no local requirement.</dd>
+        <dt>Practice</dt>
+        <dd>Solo. One person designs it and one person builds it.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ── Contact ──────────────────────────────────────────────────── -->
+  <section class="band band--sunk" id="contact" aria-labelledby="contact-h">
+    <div class="wrap contact-inner">
+      <div class="sec-head rv">
+        <p class="sec-label">Start a project</p>
+        <h2 id="contact-h">Tell me what you're building</h2>
+      </div>
+      <div class="contact-body rv">
+        <p>
+          A sentence or two about your business and what the site needs to do is
+          plenty to start. I read every message myself.
+        </p>
+        <div class="contact-act">
+          <a class="btn" href="mailto:contact@kelenmcdonald.com">
+            Email me
+            <svg class="arw" width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <p class="mailto-plain">
+            If that button doesn't open your mail app, write to
+            <a href="mailto:contact@kelenmcdonald.com">contact@kelenmcdonald.com</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-inner">
+    <p>© 2026 Kelen McDonald</p>
+    <p><a href="mailto:contact@kelenmcdonald.com">contact@kelenmcdonald.com</a></p>
+  </div>
+</footer>
+
+<script>
+/* Progressive enhancement only: nothing above is hidden unless JS runs. */
+(function () {
+  var root = document.documentElement;
+  if (!('IntersectionObserver' in window)) return;
+  root.classList.add('js');
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+  var items = document.querySelectorAll('.rv');
+  for (var i = 0; i < items.length; i++) io.observe(items[i]);
+
+  /* Failsafe: if anything stalls, reveal everything. */
+  setTimeout(function () {
+    for (var j = 0; j < items.length; j++) items[j].classList.add('in');
+  }, 2600);
+
+  /* Header hairline appears only once the page has moved. */
+  var head = document.getElementById('siteHead');
+  var onScroll = function () {
+    head.classList.toggle('is-stuck', window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+</body>
+</html>
