@@ -63,6 +63,8 @@ Confirmed visual rejections: no purple or violet anywhere, no gradients of any k
 
 **Amendment — real founder photography, hero only.** The "no photography" rule targeted generic stock imagery; it never anticipated a real photo of the founder. The hero's materials plate now holds an actual photo of Kelen McDonald, framed in the same mat-border-and-shadow language the plate always used (a physical keepsake photo, not a stock image standing in for content). This is a deliberate, scoped exception: illustration and authored SVG remain the rule everywhere else (Work plates, Services marks), and any future photography should earn the same bar — real, specific, and framed inside the system's own material language, never generic stock.
 
+**Amendment — header mark is the user's own KM favicon graphic, not authored SVG.** The header's brand mark (`.brand .mark`) was originally an authored inline-SVG asterisk in the page's own line-art grammar. It has been replaced with the user's own KM monogram favicon artwork (`<img src="/favicon.svg">`), which carries a gold gradient background — a direct exception to both "author every mark as inline SVG" and "no gradients anywhere." This is scoped to the one 22×22 header mark and the favicon/tab-icon family it matches; it is a deliberate identity choice (the user's own asset, used as-is), not a precedent for introducing gradients or raster marks elsewhere. Every other mark on the page (Work plates, Services icons, the hero swash) stays authored inline SVG, gradient-free.
+
 **Key Characteristics:**
 - Muted linen ground, never stark cream — a fabric/paper world, not a screen-white one
 - Dual accent (clay + moss) doing real work, not one color propped up alone
@@ -166,14 +168,14 @@ Corners stay small and consistent across the whole system: 2px (`--r-sm`, badges
 No form inputs exist yet on this page (the only conversion path is a `mailto:` link with a visible plain-text fallback). If inputs are added later, inherit the 4px radius and warm-shadow focus treatment established by buttons and cards.
 
 ### Navigation
-Fixed/sticky header with the logo, primary links, and CTA button. Below the mobile breakpoint, the CTA button shrinks to `.btn--sm` and its arrow icon is dropped rather than the button collapsing or overlapping the logo.
+Fixed/sticky header with the logo, primary links, and CTA button. Below the mobile breakpoint, the CTA button shrinks to `.btn--sm` and its arrow icon is dropped rather than the button collapsing or overlapping the logo. The brand mark (`.brand .mark`) is a 22×22 `<img src="/favicon.svg">` — the user's own KM monogram favicon artwork on its gold gradient background, at `--r-sm` (2px) rounding — not an authored inline SVG (see amendment above).
 
 ## Do's and Don'ts
 
 ### Do:
 - **Do** use clay and moss together as a genuine dual-accent system — never ship a screen with clay as the only accent color.
 - **Do** put section labels beside headings in the 140px margin column (or omit them), never stacked above.
-- **Do** author every illustrative mark as inline SVG in the world's own line-art grammar, sized and drawn per context.
+- **Do** author every illustrative mark as inline SVG in the world's own line-art grammar, sized and drawn per context. The header brand mark is the one sanctioned exception (see the amendment above) — the user's own favicon artwork, used as-is.
 - **Do** keep shadows warm-tinted, layered (tight + diffuse), and offset — never a flat zero-offset glow.
 - **Do** keep corners at 2/4/6px across the whole system; nothing pill-shaped.
 - **Do** keep the "Concept"/speculative labeling on every work entry prominent (a filled badge, not small meta text) — this is a durable honesty commitment from PRODUCT.md, not a style choice.
@@ -182,7 +184,7 @@ Fixed/sticky header with the logo, primary links, and CTA button. Below the mobi
 ### Don't:
 - **Don't** use a high-contrast serif as the primary display voice. Newsreader italic is budgeted for exactly one pull-quote; a second appearance dilutes the sans-as-display decision.
 - **Don't** default to cream + serif + terracotta. That combination is the specific AI-generated cliché this system was built to avoid.
-- **Don't** use purple/violet, gradients (including gradient text), glass/blur decoration, or "SaaS blob" shapes anywhere.
+- **Don't** use purple/violet, gradients (including gradient text), glass/blur decoration, or "SaaS blob" shapes anywhere on the page surface. The header favicon mark's gold gradient is the one sanctioned exception (see the amendment above) — it's the user's own brand icon, not a page-surface decoration.
 - **Don't** use stock photography anywhere. The hero's founder photo is the one sanctioned exception (see the amendment above) — a specific, real photo framed in the plate's own mat-and-shadow language, not a generic image standing in for content.
 - **Don't** build Services or Work as same-size icon+heading+text card grids — both use the alternating/list structures documented in Layout.
 - **Don't** let any interactive element look clickable (hover elevation, cursor affordance) without a real link or keyboard focus target — none of the work entries link anywhere today, so their hover states stay modest.

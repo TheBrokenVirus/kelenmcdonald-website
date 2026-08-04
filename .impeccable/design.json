@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-03T00:00:00.000Z",
+  "generatedAt": "2026-08-04T00:00:00.000Z",
   "title": "Design System: Kelen McDonald — Web Design Studio",
   "extensions": {
     "colorMeta": {
@@ -102,12 +102,13 @@
       { "name": "The Small-Text Split Rule", "body": "Raw clay (#BE6A3E) never carries text below large/display scale — use clay-ink for small clay-colored text and reserve raw clay for marks, borders, and large surfaces.", "section": "colors" },
       { "name": "The One-Serif Rule", "body": "Newsreader italic is budgeted for a single use on the page. Adding a second serif moment dilutes the sans-as-display decision this system is built on.", "section": "typography" },
       { "name": "The Beside-Not-Above Rule", "body": "A section label never sits stacked directly above its heading. It lives in a narrow (140px) margin column beside the heading, or is omitted entirely.", "section": "typography" },
-      { "name": "The Warm-Shadow Rule", "body": "Every shadow is tinted from ink-brown, never neutral black or gray — depth stays inside the linen/clay/moss world instead of reading as generic UI chrome.", "section": "elevation" }
+      { "name": "The Warm-Shadow Rule", "body": "Every shadow is tinted from ink-brown, never neutral black or gray — depth stays inside the linen/clay/moss world instead of reading as generic UI chrome.", "section": "elevation" },
+      { "name": "The Two Sanctioned Exceptions Rule", "body": "Exactly two deliberate, scoped exceptions exist to this system's absolute rules: the hero's real founder photo (an exception to \"no stock photography\") and the header's brand mark, the user's own KM favicon artwork with a gold gradient background (an exception to both \"inline SVG only\" and \"no gradients\"). Neither is a precedent — every other mark and every other image on the page stays authored SVG and gradient-free.", "section": "components" }
     ],
     "dos": [
       "Do use clay and moss together as a genuine dual-accent system — never ship a screen with clay as the only accent color.",
       "Do put section labels beside headings in the 140px margin column (or omit them), never stacked above.",
-      "Do author every illustrative mark as inline SVG in the world's own line-art grammar, sized and drawn per context.",
+      "Do author every illustrative mark as inline SVG in the world's own line-art grammar, sized and drawn per context. The header brand mark is the one sanctioned exception — the user's own favicon artwork, used as-is.",
       "Do keep shadows warm-tinted, layered (tight + diffuse), and offset — never a flat zero-offset glow.",
       "Do keep corners at 2/4/6px across the whole system; nothing pill-shaped.",
       "Do keep the \"Concept\"/speculative labeling on every work entry prominent (a filled badge, not small meta text) — this is a durable honesty commitment from PRODUCT.md, not a style choice.",
@@ -116,8 +117,8 @@
     "donts": [
       "Don't use a high-contrast serif as the primary display voice. Newsreader italic is budgeted for exactly one pull-quote; a second appearance dilutes the sans-as-display decision.",
       "Don't default to cream + serif + terracotta. That combination is the specific AI-generated cliché this system was built to avoid.",
-      "Don't use purple/violet, gradients (including gradient text), glass/blur decoration, or \"SaaS blob\" shapes anywhere.",
-      "Don't use stock photography. Illustration, texture, and typography carry the page.",
+      "Don't use purple/violet, gradients (including gradient text), glass/blur decoration, or \"SaaS blob\" shapes anywhere on the page surface. The header favicon mark's gold gradient is the one sanctioned exception — it's the user's own brand icon, not a page-surface decoration.",
+      "Don't use stock photography anywhere. The hero's founder photo is the one sanctioned exception — a specific, real photo framed in the plate's own mat-and-shadow language, not a generic image standing in for content.",
       "Don't build Services or Work as same-size icon+heading+text card grids — both use the alternating/list structures documented in Layout.",
       "Don't let any interactive element look clickable (hover elevation, cursor affordance) without a real link or keyboard focus target — none of the work entries link anywhere today, so their hover states stay modest."
     ]
