@@ -22,6 +22,21 @@ function validate(body) {
   return { value: { name, email, message } };
 }
 
+const RATE_LIMIT_MAX = 3;
+const RATE_LIMIT_WINDOW = "-1 hour";
+
+async function isRateLimited(env, ip) {
+  if (!ip) return false;
+
+  const row = await env.DB.prepare(
+    `SELECT COUNT(*) AS count FROM submissions WHERE ip = ?1 AND created_at > datetime('now', '${RATE_LIMIT_WINDOW}')`
+  )
+    .bind(ip)
+    .first();
+
+  return (row?.count || 0) >= RATE_LIMIT_MAX;
+}
+
 async function notify(env, submission) {
   if (!env.EMAIL || !env.CONTACT_TO_EMAIL || !env.CONTACT_FROM_EMAIL) return;
 
@@ -50,10 +65,15 @@ async function handleContact(request, env) {
   const { value, error } = validate(body);
   if (error) return json({ error }, 400);
 
+  const ip = request.headers.get("cf-connecting-ip") || "";
+  if (await isRateLimited(env, ip)) {
+    return json({ error: "Too many requests. Please try again later." }, 429);
+  }
+
   await env.DB.prepare(
-    "INSERT INTO submissions (name, email, message, user_agent) VALUES (?1, ?2, ?3, ?4)"
+    "INSERT INTO submissions (name, email, message, user_agent, ip) VALUES (?1, ?2, ?3, ?4, ?5)"
   )
-    .bind(value.name, value.email, value.message, request.headers.get("user-agent") || "")
+    .bind(value.name, value.email, value.message, request.headers.get("user-agent") || "", ip)
     .run();
 
   await notify(env, value);
