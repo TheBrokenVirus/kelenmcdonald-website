@@ -569,6 +569,39 @@ html.js .swash svg path{
   display:flex;flex-direction:column;align-items:flex-start;gap:14px;
 }
 
+.contact-form{
+  margin-top:clamp(30px,4vw,40px);
+  display:flex;flex-direction:column;gap:18px;
+  max-width:46ch;
+}
+.cf-row{display:flex;flex-direction:column;gap:6px}
+.cf-row label{
+  font-family:var(--font-mono);
+  font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.cf-row input,.cf-row textarea{
+  font:inherit;font-size:1rem;color:var(--ink);
+  background-color:var(--paper-hi);
+  border:1px solid var(--moss-faint);
+  border-radius:var(--r-md);
+  padding:.72rem .9rem;
+  box-shadow:inset 0 1px 2px rgba(60,38,20,.06);
+  transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
+}
+.cf-row textarea{resize:vertical;min-height:120px;line-height:1.55}
+.cf-row input:focus-visible,.cf-row textarea:focus-visible{
+  outline:none;
+  border-color:var(--clay-ink);
+  box-shadow:inset 0 1px 2px rgba(60,38,20,.06),0 0 0 3px rgba(156,78,38,.18);
+}
+.cf-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.cf-actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.cf-status{font-size:.9375rem;min-height:1.3em;color:var(--ink-soft)}
+.cf-status[data-state="ok"]{color:var(--moss-deep)}
+.cf-status[data-state="error"]{color:var(--clay-ink)}
+.contact-form .btn[disabled]{opacity:.6;pointer-events:none}
+
 /* ─────────────────────────────────────────────────────────
    Footer
    ───────────────────────────────────────────────────────── */
@@ -1131,18 +1164,37 @@ html.js .svc.rv:nth-of-type(3){transition-delay:140ms}
           A sentence or two about your business and what the site needs to do is
           plenty to start. I read every message myself.
         </p>
-        <div class="contact-act">
-          <a class="btn" href="mailto:contact@kelenmcdonald.com">
-            Email me
-            <svg class="arw" width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="cf-row">
+            <label for="cf-name">Name</label>
+            <input id="cf-name" name="name" type="text" autocomplete="name" required maxlength="200">
+          </div>
+          <div class="cf-row">
+            <label for="cf-email">Email</label>
+            <input id="cf-email" name="email" type="email" autocomplete="email" required maxlength="200">
+          </div>
+          <div class="cf-row">
+            <label for="cf-message">What are you building?</label>
+            <textarea id="cf-message" name="message" rows="5" required maxlength="5000"></textarea>
+          </div>
+          <div class="cf-hp" aria-hidden="true">
+            <label for="cf-company">Company</label>
+            <input id="cf-company" name="company" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="cf-actions">
+            <button class="btn" type="submit">
+              <span class="cf-btn-label">Send message</span>
+              <svg class="arw" width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <p class="cf-status" role="status" aria-live="polite"></p>
+          </div>
           <p class="mailto-plain">
-            If that button doesn't open your mail app, write to
+            Prefer email? Write to
             <a href="mailto:contact@kelenmcdonald.com">contact@kelenmcdonald.com</a>
           </p>
-        </div>
+        </form>
       </div>
     </div>
   </section>
@@ -1184,6 +1236,59 @@ html.js .svc.rv:nth-of-type(3){transition-delay:140ms}
   };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
+/* Contact form: progressive enhancement over the mailto fallback link above. */
+(function () {
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+
+  var status = form.querySelector('.cf-status');
+  var button = form.querySelector('button[type="submit"]');
+  var label = form.querySelector('.cf-btn-label');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var data = {
+      name: form.name.value,
+      email: form.email.value,
+      message: form.message.value,
+      company: form.company.value
+    };
+
+    button.disabled = true;
+    label.textContent = 'Sending…';
+    status.textContent = '';
+    status.removeAttribute('data-state');
+
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function (res) {
+        return res.json().then(function (body) { return { ok: res.ok, body: body }; });
+      })
+      .then(function (result) {
+        if (result.ok) {
+          form.reset();
+          status.textContent = "Sent — I'll reply within a couple of business days.";
+          status.setAttribute('data-state', 'ok');
+        } else {
+          status.textContent = result.body.error || 'Something went wrong. Please try again.';
+          status.setAttribute('data-state', 'error');
+        }
+      })
+      .catch(function () {
+        status.textContent = 'Network error — please try again, or email me directly.';
+        status.setAttribute('data-state', 'error');
+      })
+      .then(function () {
+        button.disabled = false;
+        label.textContent = 'Send message';
+      });
+  });
 })();
 </script>
 </body>

@@ -1,8 +1,27 @@
 {
-  "name": "kelenmcdonald-website",
-  "compatibility_date": "2026-08-01",
-  "assets": {
-    "directory": "./site",
-    "not_found_handling": "404-page"
-  }
+	"name": "kelenmcdonald-website",
+	"compatibility_date": "2026-08-01",
+	"main": "worker/index.js",
+	"assets": {
+		"directory": "./site",
+		"binding": "ASSETS",
+		"not_found_handling": "404-page"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "kelenmcdonald-contact",
+			"database_id": "d903f090-2ba9-4c0f-b5f8-9cf4b798d566"
+		}
+	],
+	"send_email": [
+		{ "name": "EMAIL" }
+	],
+	// Contact-form email notifications go through Cloudflare Email Service.
+	// Requires Workers Paid and the domain enabled via
+	// `wrangler email sending enable kelenmcdonald.com`.
+	"vars": {
+		"CONTACT_TO_EMAIL": "contact@kelenmcdonald.com",
+		"CONTACT_FROM_EMAIL": "notifications@kelenmcdonald.com"
+	}
 }

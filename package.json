@@ -1,0 +1,17 @@
+{
+  "name": "kelenmcdonald-website",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply kelenmcdonald-contact --local",
+    "db:migrate:remote": "wrangler d1 migrations apply kelenmcdonald-contact --remote"
+  },
+  "devDependencies": {
+    "wrangler": "^4.18.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true,
+    "workerd@1.20260730.1": true
+  }
+}

@@ -6,6 +6,11 @@
 Thumbs.db
 *.swp
 
+# Backend tooling
+node_modules/
+.wrangler/
+.dev.vars
+
 # Raw, unoptimized source photo — the deployed, compressed version lives at
 # assets/kelen.jpg; this original is 6MB and not needed in the repo.
 v3/IMG_0060.jpeg
